@@ -12,26 +12,22 @@ namespace nothinbutdotnetstore
     public class Calculator : ICalculate
     {
         IDbConnection connection;
-        IDbCommand command;
-
-        public Calculator(IDbConnection connection, IDbCommand command)
+        
+        public Calculator(IDbConnection connection)
         {
             this.connection = connection;
-            this.command = command;
         }
 
         public int add(int first, int second)
         {
             ensure_all_are_positive(first, second);
             execute_stored_procedure();
-            connection.Open();
-
             return first + second;
         }
 
         void execute_stored_procedure()
         {
-            using(command = connection.CreateCommand())
+            using(IDbCommand command = connection.CreateCommand())
             {
                 connection.Open();
                 command.CommandType = CommandType.StoredProcedure;
