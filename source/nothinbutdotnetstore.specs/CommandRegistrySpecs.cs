@@ -53,7 +53,7 @@ namespace nothinbutdotnetstore.specs
 
                 depends.on<IEnumerable<IProcessARequest>>(all_the_commands);
                 depends.on(the_special_case);
-            }
+            };
 
             Because b = () =>
                 result = sut.get_the_command_that_can_process(request);
